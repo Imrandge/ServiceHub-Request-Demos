@@ -72,8 +72,19 @@
   margin-top: 2px;
 }
 
-/* full-row field helper */
-.sn-field.full { grid-column: 1 / -1; }
+/* Full-row field helper */
+.sn-grid > .sn-field.full { grid-column: 1 / -1 !important; }
+
+/* (your existing) */
+.sn-grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .sn-grid { grid-template-columns: 1fr 1fr; }
+}
+
 
 
 /* Inputs, selects, textareas */

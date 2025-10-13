@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request a Modification or Enhancement (ADERP)</title>
+
+  <!-- Shared assets -->
+  <link rel="stylesheet" href="../assets/tokens.css" />
+  <link rel="stylesheet" href="../assets/fonts.css" />
+  <link rel="stylesheet" href="../assets/components.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="sn-form">
+
+        <!-- Header -->
+        <h1 class="h1">Request a Modification or Enhancement (ADERP)</h1>
+        <p class="subtitle">
+          Submit a structured request to modify fields/forms, notifications, business rules, integrations, or platform capabilities in ADERP.
+        </p>
+
+        <!-- Description / note -->
+        <p class="form-note">
+          Use this catalog item for enhancements and configuration changes. If you are reporting a defect or error,
+          please <a id="incident_link" href="#" target="_blank" rel="noopener">raise an incident</a> instead.
+        </p>
+
+        <!-- Approval diagram -->
+        <div class="approval-diagram" role="group" aria-label="Approval process diagram">
+          <img
+            src="./approval-process.png"
+            alt="Two-step approval: Step 1 – Entity Section Head, then Step 2 – GovFunction. Routing is based on the functional area."
+            loading="lazy" decoding="async" />
+          <div class="caption">Approvals required (2 steps). The system auto-routes approvers by functional area.</div>
+        </div>
+
+        <!-- Grid -->
+        <div class="sn-grid">
+          <!-- Requestor details (same 5 fields as other forms) -->
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Requested by</label>
+            <input id="requested_by" name="requested_by" class="sn-input" placeholder="Search/requester…" required />
+            <div class="sn-error">Please enter the requester.</div>
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Requested for</label>
+            <input id="requested_for" name="requested_for" class="sn-input" placeholder="Person/team the work is for…" required />
+            <div class="sn-error">Please enter who this is for.</div>
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Contact number</label>
+            <input id="contact" name="contact" class="sn-input" placeholder="+971 50 000 0000" required />
+            <div class="sn-help">Include country code.</div>
+            <div class="sn-error">Please enter a contact number.</div>
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label">Entity</label>
+            <input id="entity" name="entity" class="sn-input" placeholder="e.g., Department of Government Enablement" />
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label">Location</label>
+            <input id="location" name="location" class="sn-input" placeholder="e.g., DGE HQ" />
+          </div>
+
+          <!-- Offering (full width) -->
+          <div class="sn-field full">
+            <label class="sn-label"><span class="req">*</span>Offering</label>
+            <select id="offering" name="offering" class="sn-select" required>
+              <option value="" selected disabled>-- Select --</option>
+              <option>Human Resources (ADERP - Fusion)</option>
+              <option>Finance (ADERP - Fusion)</option>
+              <option>Procurement (ADERP - Fusion)</option>
+            </select>
+            <div class="sn-error">Offering is required.</div>
+          </div>
+
+          <!-- Request type (full width) -->
+          <div class="sn-field full">
+            <label class="sn-label"><span class="req">*</span>Request type</label>
+            <select id="request_type" name="request_type" class="sn-select" required>
+              <option value="" selected disabled>-- Select --</option>
+              <option value="fields_forms">Modify fields or forms</option>
+              <option value="notifications">Modify notifications</option>
+              <option value="business_rules">Modify business rules</option>
+              <option value="platform_enhancement">Platform enhancement</option>
+              <option value="integration">New / Modify system Integration</option>
+              <option value="process_change">Process Change</option>
+              <option value="reporting">Create / Modify Report or Dashboard</option>
+            </select>
+            <div class="sn-error">Please choose a request type.</div>
+          </div>
+
+          <!-- Reporting redirect guidance (only for "reporting") -->
+          <div class="sn-field hidden full" id="reportingRedirect">
+            <div class="sn-label">For reports &amp; dashboards</div>
+            <div class="help">
+              For Reporting and dashboards, please use this request:
+              <a id="reporting_link" href="#" target="_blank" rel="noopener">Reports, Data Management &amp; Analytics (ADERP)</a>.
+            </div>
+          </div>
+
+          <!-- Everything below here hides when request type = reporting -->
+          <div id="mainFields">
+
+            <!-- Module (full width, dependent on offering) -->
+            <div class="sn-field" style="grid-column:1 / -1;">
+              <label class="sn-label"><span class="req">*</span>Module</label>
+              <select id="module" name="module" class="sn-select" required>
+                <option value="" selected disabled>-- Select Offering first --</option>
+              </select>
+              <div class="sn-error">Module is required.</div>
+            </div>
+
+            <!-- Business justification (full) -->
+            <div class="sn-field" style="grid-column:1 / -1;">
+              <label class="sn-label"><span class="req">*</span>Business justification</label>
+              <textarea id="business_justification" name="business_justification" class="sn-textarea" rows="4"
+                placeholder="Explain the business need, decision/process impacted, and expected outcome." required></textarea>
+              <div class="sn-error">Business justification is required.</div>
+            </div>
+
+            <!-- Specify component (full) -->
+            <div class="sn-field" style="grid-column:1 / -1;">
+              <label class="sn-label"><span class="req">*</span>Specify the component to modify</label>
+              <input id="component" name="component" class="sn-input"
+                placeholder="e.g., Vendor form → Payment terms field; AP Workflow rule; Outbound integration; 'PO Approved' email template" required />
+              <div class="sn-help">
+                Name the exact element to be changed, based on your Request type (field/form, notification, business rule, integration,
+                platform feature, or process step).
+              </div>
+              <div class="sn-error">Please specify the component to modify.</div>
+            </div>
+
+            <!-- Attachments (full) -->
+            <div class="sn-field" style="grid-column:1 / -1;">
+              <label class="sn-label"><span class="req">*</span>Attachments</label>
+              <input id="attachments" name="attachments" class="sn-file" type="file" multiple />
+              <div class="sn-help">Provide additional documents or screenshots that illustrate the change.</div>
+              <div class="sn-error">At least one attachment is required.</div>
+            </div>
+
+            <!-- Request title (full) -->
+            <div class="sn-field" style="grid-column:1 / -1;">
+              <label class="sn-label"><span class="req">*</span>Request title</label>
+              <input id="request_title" name="request_title" class="sn-input"
+                placeholder="e.g., Add 'Payment Terms' to Vendor Form; Increase PR approval threshold" required />
+              <div class="sn-error">Request title is required.</div>
+            </div>
+
+            <!-- Request description (full) -->
+            <div class="sn-field" style="grid-column:1 / -1;">
+              <label class="sn-label"><span class="req">*</span>Request description</label>
+              <textarea id="request_description" name="request_description" class="sn-textarea" rows="6"
+                placeholder="Describe the change in detail: current vs desired behavior, users impacted, conditions/thresholds, routing, dependencies, non-functional needs (security, audit, performance), and testing/rollout considerations."
+                required></textarea>
+              <div class="sn-help">Please provide as much detail as possible to speed up delivery.</div>
+              <div class="sn-error">Request description is required.</div>
+            </div>
+
+          </div><!-- /#mainFields -->
+
+        </div><!-- /sn-grid -->
+
+        <!-- Actions -->
+        <div class="sn-actions">
+          <button id="submitBtn" class="btn" type="submit">Submit (mock)</button>
+          <button id="printBtn" class="btn btn-secondary" type="button">Print to PDF</button>
+        </div>
+
+        <div id="submission_output" class="note hidden" style="margin-top:16px;"></div>
+
+      </div><!-- /sn-form -->
+    </div><!-- /card -->
+  </div><!-- /container -->
+
+  <script src="./demo.js?v=2" defer></script>
+</body>
+</html>
