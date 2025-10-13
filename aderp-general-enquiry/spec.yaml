@@ -1,0 +1,33 @@
+
+meta:
+  title: "ADERP General Enquiry"
+  short_description: "Submit a general enquiry for ADERP"
+  description: "Submit any enquiries or questions relating to ADERP. If you are experiencing an issue with ADERP, please submit an issue here (hyperlink)."
+  submit_button: "Submit"
+fields:
+  - { name: requested_by,       label: "Requested by",      type: reference, reference: sys_user, required: true,  read_only: true }
+  - { name: requested_for,      label: "Requested for",     type: reference, reference: sys_user, required: true }
+  - { name: contact_number,     label: "Contact number",    type: text,      required: true }
+  - { name: location,           label: "Location",          type: text,      required: true }
+  - { name: entity,             label: "Entity",            type: reference, reference: core_company }
+  - { name: offering,           label: "Offering",          type: select,    required: true,
+      choices: ["Finance (ADERP - Fusion)","Human Resources (ADERP - Fusion)","Procurement (ADERP - Fusion)"] }
+  - { name: request_type,       label: "Request type",      type: select,    read_only: true, default: "General Enquiry", choices: ["General Enquiry"] }
+  - { name: request_title,      label: "Request title",     type: text,      required: true }
+  - { name: request_description,label: "Request description",type: textarea, required: true }
+logic:
+  ui_policies:
+    - when: {}
+      then:
+        - read_only: [request_type]
+        - require: [offering, request_title, request_description, contact_number]
+  client_scripts:
+    - name: "validate_required"
+      trigger: onSubmit
+      script_hint: "Block submit if required fields are empty"
+sn_mapping:
+  table: sc_cat_item
+  variable_prefix: "aderp_gen_"
+  order_increment: 10
+  assignment_group: "ERP Support"
+  approval_flow: "None"

@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ADERP General Enquiry — Demo Form</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body>
+  <main class="sn-form" id="formRoot">
+    <h1>ADERP General Enquiry</h1>
+    <p class="desc">
+      Submit a general enquiry for ADERP. Submit any enquiries or questions relating to ADERP.
+      If you are experiencing an issue with ADERP, please <a href="#" id="issueLink" target="_blank" rel="noopener">submit an issue here</a>.
+    </p>
+
+    <div class="sn-grid">
+      <div class="sn-field" data-name="requested_by">
+        <label class="sn-label">Requested by <span class="req">*</span></label>
+        <input class="sn-input" type="text" value="Imran Akbik" readonly />
+      </div>
+
+      <div class="sn-field" data-name="requested_for">
+        <label class="sn-label">Requested for <span class="req">*</span></label>
+        <input class="sn-input" type="text" value="Imran Akbik" />
+      </div>
+
+      <div class="sn-field" data-name="contact_number">
+        <label class="sn-label">Contact number <span class="req">*</span></label>
+        <input class="sn-input" id="contact_number" type="tel" placeholder="+971 50 000 0000" />
+      </div>
+
+      <div class="sn-field" data-name="entity">
+        <label class="sn-label">Entity</label>
+        <input class="sn-input" type="text" value="Department of Government Enablement" />
+      </div>
+
+      <div class="sn-field" data-name="location">
+        <label class="sn-label">Location <span class="req">*</span></label>
+        <input class="sn-input" type="text" value="DGE HQ" />
+      </div>
+
+      <div class="sn-field" data-name="offering" style="grid-column: 1 / -1;">
+        <label class="sn-label">Offering <span class="req">*</span></label>
+        <select class="sn-select" id="offering" required>
+          <option value="">-- Select --</option>
+          <option>Finance (ADERP - Fusion)</option>
+          <option>Human Resources (ADERP - Fusion)</option>
+          <option>Procurement (ADERP - Fusion)</option>
+        </select>
+        <div class="sn-error">Offering is required.</div>
+      </div>
+
+      <div class="sn-field readonly" data-name="request_type">
+        <label class="sn-label">Request type</label>
+        <input class="sn-input" type="text" value="General Enquiry" readonly />
+        <div class="sn-help">Read-only; preset by policy</div>
+      </div>
+
+      <div class="sn-field" data-name="request_title">
+        <label class="sn-label">Request title <span class="req">*</span></label>
+        <input class="sn-input" id="request_title" type="text" placeholder="e.g., Clarification on purchase workflow" />
+        <div class="sn-error">Please enter a title.</div>
+      </div>
+
+      <div class="sn-field" data-name="request_description" style="grid-column: 1 / -1;">
+        <label class="sn-label">Request description <span class="req">*</span></label>
+        <textarea class="sn-textarea" id="request_description" placeholder="Describe your enquiry..."></textarea>
+        <div class="sn-error">Please enter a description.</div>
+      </div>
+    </div>
+
+    <div class="sn-actions">
+      <button class="btn btn-primary" id="submitBtn">Submit</button>
+      <button class="btn btn-secondary" type="button" onclick="window.print()">Print to PDF</button>
+    </div>
+  </main>
+
+  <script src="./demo.js"></script>
+</body>
+</html>

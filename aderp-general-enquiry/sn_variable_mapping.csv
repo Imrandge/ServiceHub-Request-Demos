@@ -1,0 +1,10 @@
+order,name,label,type,mandatory,read_only,reference/choices,notes
+10,aderp_gen_requested_by,Requested by,reference,true,true,sys_user,Prefill with current user
+20,aderp_gen_requested_for,Requested for,reference,true,false,sys_user,
+30,aderp_gen_contact_number,Contact number,string,true,false,,phone format optional
+40,aderp_gen_location,Location,string,true,false,,
+50,aderp_gen_entity,Entity,reference,false,false,core_company,
+60,aderp_gen_offering,Offering,select,true,false,Finance (ADERP - Fusion);Human Resources (ADERP - Fusion);Procurement (ADERP - Fusion),
+70,aderp_gen_request_type,Request type,select,true,true,General Enquiry,Preset UI policy
+80,aderp_gen_request_title,Request title,string,true,false,,
+90,aderp_gen_request_description,Request description,multi-line,true,false,,
