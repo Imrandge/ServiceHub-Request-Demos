@@ -1,0 +1,50 @@
+/* Base typography & document resets */
+* { box-sizing: border-box; }
+html, body {
+  padding: 0; margin: 0;
+}
+html { font-size: 16px; }
+body {
+  font-family: var(--font-sans);
+  color: var(--ink-800);
+  background: var(--bg-canvas);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links */
+a {
+  color: var(--brand-600);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* Headings */
+.h1, h1 {
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
+  color: var(--ink-900);
+  margin: 0 0 var(--sp-2);
+  font-weight: 800;
+}
+.h2, h2 {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-tight);
+  color: var(--ink-900);
+  margin: 0 0 var(--sp-2);
+  font-weight: 700;
+}
+.sub, .subtitle {
+  font-size: var(--fs-md);
+  color: var(--ink-500);
+}
+
+/* Small text helpers */
+.muted { color: var(--ink-500); }
+.caption { font-size: var(--fs-xs); color: var(--ink-500); }
+.badge { font-size: var(--fs-xs); padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--border-default); background: var(--brand-50); color: var(--ink-800); }
+
+/* RTL support base */
+[dir="rtl"] .h1, [dir="rtl"] h1,
+[dir="rtl"] .h2, [dir="rtl"] h2 { letter-spacing: 0; }

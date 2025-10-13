@@ -1,0 +1,225 @@
+/* -------------- Layout & Card ---------------- */
+.container {
+  max-width: var(--container-w);
+  margin: var(--sp-8) auto;
+  padding: 0 var(--sp-4);
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* Header block resembling ServiceNow form header */
+.card-header {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+  border-bottom: 1px solid var(--border-default);
+  background: linear-gradient(180deg, #fff, #fff 60%, #fafbfc);
+}
+.card-header .icon {
+  display: grid; place-items: center;
+  width: 80px; height: 80px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+  background: #fff;
+}
+.card-header .meta { display: flex; flex-direction: column; justify-content: center; }
+.card-header .title { composes: h1; } /* not all bundlers support composes; safe to keep class only */
+.card-header .subtitle { margin-top: 4px; }
+
+/* -------------- Form ---------------- */
+.sn-form {
+  padding: var(--sp-6);
+}
+
+.form-note {
+  background: #fff;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--ink-600);
+  margin: var(--sp-3) 0 var(--sp-6);
+}
+
+/* Grid: two columns on desktop, single on mobile */
+.sn-grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .sn-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Field */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.label-row {
+  display: flex; align-items: center; gap: 6px;
+  font-size: var(--fs-sm); color: var(--ink-600);
+}
+.label-row .required {
+  color: var(--danger);
+  margin-inline-end: 2px;
+}
+.help {
+  font-size: var(--fs-xs);
+  color: var(--ink-500);
+  margin-top: 2px;
+}
+
+/* Inputs, selects, textareas */
+.input, .select, .textarea {
+  width: 100%;
+  background: var(--field-bg);
+  color: var(--ink-800);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  line-height: var(--lh-base);
+  font-size: var(--fs-md);
+  transition: box-shadow var(--t-100) var(--ease), border-color var(--t-100) var(--ease), background-color var(--t-100) var(--ease);
+  appearance: none;
+}
+.input:hover, .select:hover, .textarea:hover {
+  background: var(--field-bg-hover);
+}
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--field-ring);
+}
+.input[disabled], .select[disabled], .textarea[disabled] {
+  background: var(--field-bg-disabled);
+  color: var(--ink-500);
+}
+
+/* Select caret (pseudo) */
+.select--with-caret {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ink-500) 50%),
+    linear-gradient(135deg, var(--ink-500) 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 16px) calc(50% - 3px),
+    calc(100% - 11px) calc(50% - 3px),
+    calc(100% - 2.2em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+
+/* Pills for selected users/entities (“chips”) */
+.pills {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+  padding: 6px 10px;
+  background: #fff;
+  font-size: var(--fs-sm);
+  color: var(--ink-800);
+}
+.pill .avatar {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--brand-50); border: 1px solid var(--border-default);
+}
+.pill .x {
+  width: 16px; height: 16px; display: inline-grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-default);
+  font-size: 10px; color: var(--ink-500);
+  cursor: pointer;
+}
+
+/* Info icon next to labels */
+.info {
+  display: inline-grid; place-items: center;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #e6f0fb;
+  color: #1d4ed8;
+  font-weight: 700; font-size: 12px;
+  border: 1px solid #cfe1fb;
+}
+
+/* Error state */
+.field--error .input,
+.field--error .select,
+.field--error .textarea {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 2px rgba(220,38,38,.08);
+}
+.field--error .help { color: var(--danger); }
+
+/* Section dividers & small headings */
+.section {
+  grid-column: 1 / -1;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-default);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--brand-600);
+  background: var(--brand-600);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--t-100) var(--ease), box-shadow var(--t-100) var(--ease), background-color var(--t-100) var(--ease);
+  box-shadow: var(--shadow-sm);
+}
+.btn:hover { filter: brightness(1.03); }
+.btn:active { transform: translateY(1px); }
+.btn--secondary {
+  background: #fff;
+  color: var(--ink-800);
+  border-color: var(--border-default);
+}
+
+/* Attachment area */
+.attachments {
+  display: flex; align-items: center; gap: 10px;
+  padding: var(--sp-4);
+  border-top: 1px solid var(--border-default);
+  background: #fff;
+}
+.attachments .paperclip {
+  width: 22px; height: 22px; border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+  display: grid; place-items: center;
+  background: #fff;
+  color: var(--ink-600);
+}
+
+/* Approval diagram component (if you include it) */
+.approval-diagram {
+  margin: var(--sp-3) 0 var(--sp-6);
+  text-align: center;
+}
+.approval-diagram img {
+  max-width: 100%; height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-sm);
+}
+.approval-diagram .caption { font-size: var(--fs-xs); color: var(--ink-500); margin-top: 6px; }
+
+/* Print tweaks */
+@media print {
+  body { background: #fff; }
+  .container { margin: 0; }
+  .card { box-shadow: none; border-color: var(--border-strong); }
+  .btn { display: none; }
+}
