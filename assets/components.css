@@ -223,3 +223,52 @@
   .card { box-shadow: none; border-color: var(--border-strong); }
   .btn { display: none; }
 }
+
+/* === Compatibility layer for sn-* classes === */
+
+/* layout */
+.sn-form { max-width: var(--container-w); margin: var(--sp-8) auto; padding: 0 var(--sp-4); }
+.sn-actions { display:flex; gap: var(--sp-3); padding: var(--sp-6) 0; }
+
+/* grid */
+.sn-grid { display:grid; gap: var(--sp-4); grid-template-columns: 1fr; }
+@media (min-width: 900px){ .sn-grid { grid-template-columns: 1fr 1fr; } }
+
+/* fields */
+.sn-field { display:flex; flex-direction:column; gap:6px; }
+.sn-label { font-size: var(--fs-sm); color: var(--ink-600); }
+.req { color: var(--danger); margin-inline-end: 2px; }
+.sn-help { font-size: var(--fs-xs); color: var(--ink-500); }
+.sn-error { display:none; font-size: var(--fs-xs); color: var(--danger); }
+.hidden { display:none !important; }
+
+/* inputs */
+.sn-input, .sn-select, .sn-textarea, .sn-file {
+  width:100%; background: var(--field-bg); color: var(--ink-800);
+  border:1px solid var(--border-default); border-radius: var(--radius-md);
+  padding:10px 12px; font-size: var(--fs-md); line-height: var(--lh-base);
+  transition: box-shadow var(--t-100) var(--ease), border-color var(--t-100) var(--ease), background-color var(--t-100) var(--ease);
+}
+.sn-input:hover, .sn-select:hover, .sn-textarea:hover { background: var(--field-bg-hover); }
+.sn-input:focus, .sn-select:focus, .sn-textarea:focus {
+  outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px var(--field-ring);
+}
+
+/* error state toggled by JS: .sn-field.error */
+.sn-field.error .sn-input,
+.sn-field.error .sn-select,
+.sn-field.error .sn-textarea { border-color: var(--danger); box-shadow: 0 0 0 2px rgba(220,38,38,.08); }
+.sn-field.error .sn-error { display:block; }
+
+/* diagram (if not already present) */
+.approval-diagram { margin: var(--sp-3) 0 var(--sp-6); text-align:center; }
+.approval-diagram img { max-width:100%; height:auto; border-radius: var(--radius-lg); border:1px solid var(--border-default); box-shadow: var(--shadow-sm); }
+.approval-diagram .caption { font-size: var(--fs-xs); color: var(--ink-500); margin-top:6px; }
+
+/* buttons (map to your existing .btn styles) */
+.btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius: var(--radius-md);
+       border:1px solid var(--brand-600); background: var(--brand-600); color:#fff; font-weight:600; cursor:pointer; box-shadow: var(--shadow-sm);
+       transition: transform var(--t-100) var(--ease), box-shadow var(--t-100) var(--ease), background-color var(--t-100) var(--ease); }
+.btn:hover { filter: brightness(1.03); }
+.btn:active { transform: translateY(1px); }
+.btn-secondary { background:#fff; color:var(--ink-800); border-color: var(--border-default); }
