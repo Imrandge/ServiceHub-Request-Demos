@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reports, Data Management & Analytics (ADERP)</title>
+
+  <!-- Shared assets (adjust ../ if your folder depth differs) -->
+  <link rel="stylesheet" href="../assets/tokens.css" />
+  <link rel="stylesheet" href="../assets/fonts.css" />
+  <link rel="stylesheet" href="../assets/components.css" />
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <div class="sn-form">
+
+        <!-- Header -->
+        <h1 class="h1">Reports, Data Management &amp; Analytics (ADERP)</h1>
+        <p class="subtitle">Request reports, dashboards, data extraction, or analytics from ADERP.</p>
+
+        <!-- Optional note -->
+        <p class="form-note">
+          Use this form to request new or updated reporting/analytics or a data extract. For workflow issues/errors,
+          please raise an issue instead.
+        </p>
+
+        <!-- Grid -->
+        <div class="sn-grid">
+
+          <!-- Requestor block (same 5 fields used in your other demos) -->
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Requested by</label>
+            <input id="requested_by" name="requested_by" class="sn-input" placeholder="Search/requester…" required />
+            <div class="sn-error">Please enter the requester.</div>
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Requested for</label>
+            <input id="requested_for" name="requested_for" class="sn-input" placeholder="Person/team the work is for…" required />
+            <div class="sn-error">Please enter who this is for.</div>
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Contact number</label>
+            <input id="contact" name="contact" class="sn-input" placeholder="+971 50 000 0000" required />
+            <div class="sn-help">Include country code.</div>
+            <div class="sn-error">Please enter a contact number.</div>
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label">Entity</label>
+            <input id="entity" name="entity" class="sn-input" placeholder="e.g., Department of Government Enablement" />
+          </div>
+
+          <div class="sn-field">
+            <label class="sn-label">Location</label>
+            <input id="location" name="location" class="sn-input" placeholder="e.g., DGE HQ" />
+          </div>
+
+          <!-- Offering -->
+          <div class="sn-field full">
+            <label class="sn-label"><span class="req">*</span>Offering</label>
+            <select id="offering" name="offering" class="sn-select" required>
+              <option value="" selected disabled>-- Select --</option>
+              <option>Human Resources (ADERP - Fusion)</option>
+              <option>Finance (ADERP - Fusion)</option>
+              <option>Procurement (ADERP - Fusion)</option>
+            </select>
+            <div class="sn-error">Offering is required.</div>
+          </div>
+          <!-- Request type -->
+          <div class="sn-field full">
+            <label class="sn-label"><span class="req">*</span>Request type</label>
+            <select id="request_type" name="request_type" class="sn-select" required>
+              <option value="" selected disabled>-- Select --</option>
+              <option value="new">Request a new report / dashboard</option>
+              <option value="modify">Modify an existing report / dashboard</option>
+              <option value="data">Request data</option>
+            </select>
+            <div class="sn-error">Please choose a request type.</div>
+          </div>
+
+
+          <!-- Contextual guidance for "new" selection -->
+          <div class="sn-field hidden" id="newReportGuidance">
+            <div class="sn-label">Before requesting a new report</div>
+            <div class="help">
+              Please review our existing <a id="reports_link" href="#" target="_blank" rel="noopener">reports and dashboards</a>.
+              We maintain a large repository of ready-to-use content that may already meet your needs.
+            </div>
+            <label class="sn-label" style="margin-top:8px;">
+              <input type="checkbox" id="confirm_reviewed" class="sn-input" style="width:auto; margin-right:6px;" />
+              I confirm that I have reviewed available reports and dashboards and could not find anything that meets my needs.
+            </label>
+            <div class="sn-error" id="confirm_reviewed_error">You must confirm you reviewed available reports/dashboards.</div>
+          </div>
+
+          <!-- Business justification -->
+          <div class="sn-field" style="grid-column:1 / -1;">
+            <label class="sn-label"><span class="req">*</span>Business justification</label>
+            <textarea id="business_justification" name="business_justification" class="sn-textarea" rows="4" placeholder="Explain the business need, decision/process impacted, and expected outcome." required></textarea>
+            <div class="sn-error">Business justification is required.</div>
+          </div>
+
+          <!-- Attachment (mandatory screenshot) -->
+          <div class="sn-field" style="grid-column:1 / -1;">
+            <label class="sn-label"><span class="req">*</span>Reference screenshot</label>
+            <input id="reference_screenshot" name="reference_screenshot" class="sn-file" type="file" accept="image/*" required />
+            <div class="sn-help">
+              Provide a screenshot of something similar you require. <strong>Or, if you need to modify a report or dashboard,
+                provide a screenshot of what needs to be changed.</strong>
+            </div>
+            <div class="sn-error">A reference screenshot is required.</div>
+          </div>
+          <!-- Request title -->
+          <div class="sn-field" style="grid-column:1 / -1;">
+            <label class="sn-label"><span class="req">*</span>Request title</label>
+            <input id="request_title" name="request_title" class="sn-input" placeholder="e.g., CFO Margin Bridge Dashboard" required />
+            <div class="sn-error">Request title is required.</div>
+          </div>
+
+          <!-- Request description -->
+          <div class="sn-field" style="grid-column:1 / -1;">
+            <label class="sn-label"><span class="req">*</span>Request description</label>
+            <textarea id="request_description" name="request_description" class="sn-textarea" rows="6" placeholder="Describe in detail: key metrics, filters, grouping, time frames, visual types, user audience, refresh frequency, export needs, and security/scope requirements." required></textarea>
+            <div class="sn-help">Please provide as much detail as possible to speed up delivery.</div>
+            <div class="sn-error">Request description is required.</div>
+          </div>
+
+        </div> <!-- /sn-grid -->
+
+        <!-- Actions -->
+        <div class="sn-actions">
+          <button id="submitBtn" class="btn" type="submit">Submit (mock)</button>
+          <button id="printBtn" class="btn btn-secondary" type="button">Print to PDF</button>
+        </div>
+
+        <!-- Mock payload output -->
+        <div id="submission_output" class="note hidden" style="margin-top:16px;"></div>
+
+      </div><!-- /sn-form -->
+    </div><!-- /card -->
+  </div><!-- /container -->
+
+  <script src="./reports-data-analytics.js"></script>
+</body>
+</html>

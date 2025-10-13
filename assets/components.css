@@ -72,6 +72,10 @@
   margin-top: 2px;
 }
 
+/* full-row field helper */
+.sn-field.full { grid-column: 1 / -1; }
+
+
 /* Inputs, selects, textareas */
 .input, .select, .textarea {
   width: 100%;
