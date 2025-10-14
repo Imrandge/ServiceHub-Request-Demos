@@ -1,3 +1,12 @@
+// Modify Approval Workflow or DoA (ADERP) — Demo (strict mapping)
+
+// Optional external links in your description (set if you have them)
+const URLS = {
+  issue:       "https://example.com/incident",
+  enhancement: "https://example.com/enhancement",
+  reporting:   "https://example.com/reporting"
+};
+
 // --- Mapping --------------------------------------------------------------
 // Offering labels -> internal domains used in the dependency tree
 const OFFERING_TO_DOMAIN = {
@@ -180,141 +189,153 @@ const MAP = {
   }
 };
 
-// --- Elements -------------------------------------------------------------
-const offeringEl = document.getElementById('offering');
-const moduleEl = document.getElementById('module');
-const workflowEl = document.getElementById('workflow');
-const otherWrapper = document.getElementById('otherWrapper');
-const otherEl = document.getElementById('other_workflow');
+// --- DOM -------------------------------------------------------------------
+const offeringEl   = document.getElementById("offering");
+const moduleEl     = document.getElementById("module");
+const workflowEl   = document.getElementById("workflow");
+const otherWrap    = document.getElementById("otherWrapper");
+const otherEl      = document.getElementById("other_workflow");
 
-const requestedForEl = document.getElementById('requested_for');
-const contactEl = document.getElementById('contact_number');
-const locationEl = document.getElementById('location');
-const titleEl = document.getElementById('request_title');
-const justEl = document.getElementById('business_justification');
-const descEl = document.getElementById('change_description');
+const requestedFor = document.getElementById("requested_for");
+const contactEl    = document.getElementById("contact_number");
+const locationEl   = document.getElementById("location");
+const titleEl      = document.getElementById("request_title");
+const justEl       = document.getElementById("business_justification");
+const descEl       = document.getElementById("change_description");
 
-const attachEl = document.getElementById('attachments');
-const attachList = document.getElementById('attachmentList');
+const attachEl     = document.getElementById("attachments");
+const attachList   = document.getElementById("attachmentList");
+const submitBtn    = document.getElementById("submitBtn");
+const out          = document.getElementById("submission_output");
 
-// --- Helpers --------------------------------------------------------------
-function clearSelect(select, placeholderText) {
-  select.innerHTML = '';
-  const opt = document.createElement('option');
-  opt.value = '';
-  opt.textContent = placeholderText || '-- Select --';
-  select.appendChild(opt);
+// wire description links if present
+["issue_link","enhancement_link","reporting_link"].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (id === "issue_link") el.href = URLS.issue;
+  if (id === "enhancement_link") el.href = URLS.enhancement;
+  if (id === "reporting_link") el.href = URLS.reporting;
+});
+
+// --- helpers ---------------------------------------------------------------
+function clearSelect(sel, placeholder) {
+  sel.innerHTML = "";
+  const ph = document.createElement("option");
+  ph.value = "";
+  ph.textContent = placeholder;
+  ph.disabled = true; ph.selected = true;
+  sel.appendChild(ph);
 }
-
-function populateSelect(select, values) {
-  clearSelect(select, '-- Select --');
-  values.forEach(v => {
-    const o = document.createElement('option');
-    o.textContent = v;
-    o.value = v;
-    select.appendChild(o);
+function populateSelect(sel, arr) {
+  clearSelect(sel, "-- Select --");
+  arr.forEach(v => {
+    const o = document.createElement("option");
+    o.value = v; o.textContent = v;
+    sel.appendChild(o);
   });
-  select.disabled = false;
+  sel.disabled = false;
+}
+function setError(input, flag) {
+  const field = input.closest(".sn-field");
+  if (field) field.classList.toggle("error", !!flag);
+}
+function requiredOK(input) {
+  const v = (input.type === "file")
+    ? (input.files && input.files.length > 0)
+    : !!String(input.value || "").trim();
+  setError(input, !v);
+  return v;
 }
 
-function setErrorFor(el, hasError) {
-  const field = el.closest('.sn-field');
-  if (!field) return;
-  field.classList.toggle('error', hasError);
-}
-
-// --- Dependency wiring ----------------------------------------------------
-offeringEl.addEventListener('change', () => {
+// --- offering → module -----------------------------------------------------
+offeringEl.addEventListener("change", () => {
   const domain = OFFERING_TO_DOMAIN[offeringEl.value] || null;
 
-  // Reset module & workflow & other
-  clearSelect(moduleEl, domain ? '-- Select --' : '-- Select Offering first --');
+  clearSelect(moduleEl, domain ? "-- Select Module --" : "-- Select Offering first --");
   moduleEl.disabled = !domain;
-  clearSelect(workflowEl, '-- Select Module first --');
+
+  clearSelect(workflowEl, "-- Select Module first --");
   workflowEl.disabled = true;
-  otherWrapper.classList.add('hidden');
-  otherEl.value = '';
+
+  otherWrap.classList.add("hidden");
+  otherEl.value = "";
 
   if (!domain) return;
-
   const modules = Object.keys(MAP[domain] || {});
   populateSelect(moduleEl, modules);
 });
 
-moduleEl.addEventListener('change', () => {
+// --- module → workflow -----------------------------------------------------
+moduleEl.addEventListener("change", () => {
   const domain = OFFERING_TO_DOMAIN[offeringEl.value] || null;
-  const mod = moduleEl.value || null;
+  const mod    = moduleEl.value || null;
 
-  // Reset workflow & other
-  clearSelect(workflowEl, mod ? '-- Select --' : '-- Select Module first --');
+  clearSelect(workflowEl, mod ? "-- Select Workflow / DoA --" : "-- Select Module first --");
   workflowEl.disabled = !mod;
-  otherWrapper.classList.add('hidden');
-  otherEl.value = '';
+
+  otherWrap.classList.add("hidden");
+  otherEl.value = "";
 
   if (!domain || !mod) return;
-
-  const workflows = (MAP[domain] && MAP[domain][mod]) ? MAP[domain][mod] : [];
-  populateSelect(workflowEl, workflows);
+  const list = (MAP[domain] && MAP[domain][mod]) ? MAP[domain][mod] : [];
+  populateSelect(workflowEl, list);
 });
 
-workflowEl.addEventListener('change', () => {
-  const isOther = workflowEl.value === 'Other (specify)';
-  otherWrapper.classList.toggle('hidden', !isOther);
-  if (!isOther) {
-    otherEl.value = '';
-  }
+// --- workflow → other(specify) --------------------------------------------
+workflowEl.addEventListener("change", () => {
+  const showOther = workflowEl.value === "Other (specify)";
+  otherWrap.classList.toggle("hidden", !showOther);
+  if (!showOther) otherEl.value = "";
 });
 
-// --- Attachments UX (optional, front-end only) ----------------------------
-attachEl?.addEventListener('change', () => {
-  if (!attachList) return;
+// --- attachments UX (optional) --------------------------------------------
+attachEl?.addEventListener("change", () => {
   const files = Array.from(attachEl.files || []);
-  if (!files.length) { attachList.textContent = ''; return; }
-  attachList.textContent = 'Selected files: ' + files.map(f => f.name).join(', ');
+  attachList.textContent = files.length ? ("Selected files: " + files.map(f => f.name).join(", ")) : "";
 });
 
-// --- Validation -----------------------------------------------------------
-function validate() {
-  let ok = true;
-
-  // Required fields per requirements
-  const checks = [
-    offeringEl,
-    moduleEl,
-    workflowEl,
-    titleEl,
-    justEl,
-    descEl,
-    requestedForEl,
-    contactEl,
-    locationEl
-  ];
-
-  checks.forEach(el => {
-    const empty = !el.value || !String(el.value).trim();
-    setErrorFor(el, empty);
-    if (empty) ok = false;
-  });
-
-  // Conditional "Other workflow or DOA"
-  if (workflowEl.value === 'Other (specify)') {
-    const emptyOther = !otherEl.value || !otherEl.value.trim();
-    setErrorFor(otherEl, emptyOther);
-    if (emptyOther) ok = false;
-  } else {
-    setErrorFor(otherEl, false);
-  }
-
-  return ok;
-}
-
-// --- Submit ---------------------------------------------------------------
-document.getElementById('submitBtn').addEventListener('click', (e) => {
+// --- submit (mock) ---------------------------------------------------------
+submitBtn?.addEventListener("click", (e) => {
   e.preventDefault();
-  if (validate()) {
-    alert('All validations passed. (Demo only)');
+
+  let valid = true;
+  [
+    offeringEl, moduleEl, workflowEl,
+    requestedFor, contactEl, locationEl,
+    titleEl, justEl, descEl
+  ].forEach(el => { valid = requiredOK(el) && valid; });
+
+  if (workflowEl.value === "Other (specify)") {
+    valid = requiredOK(otherEl) && valid;
   } else {
-    const firstErr = document.querySelector('.sn-field.error .sn-input, .sn-field.error .sn-select, .sn-field.error .sn-textarea');
-    if (firstErr) firstErr.focus();
+    setError(otherEl, false);
   }
+
+  if (!valid) {
+    const firstErr = document.querySelector(".sn-field.error .sn-input, .sn-field.error .sn-select, .sn-field.error .sn-textarea, .sn-field.error .sn-file");
+    firstErr?.focus();
+    return;
+  }
+
+  const payload = {
+    requested_for: requestedFor.value.trim(),
+    contact: contactEl.value.trim(),
+    location: locationEl.value.trim(),
+    offering: offeringEl.value,
+    module: moduleEl.value,
+    workflow_or_doa: workflowEl.value,
+    other_workflow: workflowEl.value === "Other (specify)" ? otherEl.value.trim() : null,
+    business_justification: justEl.value.trim(),
+    request_title: titleEl.value.trim(),
+    change_description: descEl.value.trim(),
+    attachments: attachEl?.files ? [...attachEl.files].map(f => f.name) : [],
+    submitted_at: new Date().toISOString()
+  };
+
+  out.classList.remove("hidden");
+  out.innerHTML = "<strong>Mock submission payload</strong>";
+  const pre = document.createElement("pre");
+  pre.textContent = JSON.stringify(payload, null, 2);
+  out.appendChild(pre);
+  out.scrollIntoView({ behavior: "smooth", block: "start" });
 });

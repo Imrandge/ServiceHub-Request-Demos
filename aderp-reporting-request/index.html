@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="../assets/fonts.css" />
   <link rel="stylesheet" href="../assets/components.css" />
 </head>
+
 <body>
 
   <div class="container">
@@ -22,8 +24,22 @@
 
         <!-- Optional note -->
         <p class="form-note">
-          Use this form to request new or updated reporting/analytics or a data extract. For workflow issues/errors,
-          please raise an issue instead.
+          Use this form to request new or updated reporting/analytics or a data extract.
+          <br /><br />
+          If your need fits one of the categories below, use the appropriate request instead:
+        <ul style="margin:8px 0 0 18px;">
+          <li>System issue or something not working as expected → <a id="issue_link" href="#" target="_blank"
+              rel="noopener">submit an issue here</a></li>
+          <li>New capability or improvement → <a id="enhancement_link" href="#" target="_blank" rel="noopener">go
+              here</a></li>
+          <li>New or changed reports/dashboards → <a id="reporting_link" href="#" target="_blank" rel="noopener">go
+              here</a></li>
+          <li>Change to an approval workflow or Delegation of Authority (DoA) → <a id="workflow_link" href="#"
+              target="_blank" rel="noopener">go here</a></li>
+          <li>To request access → <a id="workflow_link" href="#" target="_blank" rel="noopener">go here</a></li>
+        </ul>
+        <br />
+        <strong>Important:</strong> Requests submitted under the wrong category will be rejected.
         </p>
 
         <!-- Grid -->
@@ -38,7 +54,8 @@
 
           <div class="sn-field">
             <label class="sn-label"><span class="req">*</span>Requested for</label>
-            <input id="requested_for" name="requested_for" class="sn-input" placeholder="Person/team the work is for…" required />
+            <input id="requested_for" name="requested_for" class="sn-input" placeholder="Person/team the work is for…"
+              required />
             <div class="sn-error">Please enter who this is for.</div>
           </div>
 
@@ -87,29 +104,36 @@
           <div class="sn-field hidden" id="newReportGuidance">
             <div class="sn-label">Before requesting a new report</div>
             <div class="help">
-              Please review our existing <a id="reports_link" href="#" target="_blank" rel="noopener">reports and dashboards</a>.
+              Please review our existing <a id="reports_link" href="#" target="_blank" rel="noopener">reports and
+                dashboards</a>.
               We maintain a large repository of ready-to-use content that may already meet your needs.
             </div>
             <label class="sn-label" style="margin-top:8px;">
               <input type="checkbox" id="confirm_reviewed" class="sn-input" style="width:auto; margin-right:6px;" />
-              I confirm that I have reviewed available reports and dashboards and could not find anything that meets my needs.
+              I confirm that I have reviewed available reports and dashboards and could not find anything that meets my
+              needs.
             </label>
-            <div class="sn-error" id="confirm_reviewed_error">You must confirm you reviewed available reports/dashboards.</div>
+            <div class="sn-error" id="confirm_reviewed_error">You must confirm you reviewed available
+              reports/dashboards.</div>
           </div>
 
           <!-- Business justification -->
           <div class="sn-field" style="grid-column:1 / -1;">
             <label class="sn-label"><span class="req">*</span>Business justification</label>
-            <textarea id="business_justification" name="business_justification" class="sn-textarea" rows="4" placeholder="Explain the business need, decision/process impacted, and expected outcome." required></textarea>
+            <textarea id="business_justification" name="business_justification" class="sn-textarea" rows="4"
+              placeholder="Requests without a suitable business justification may be deprioritized or rejected. Please articulate the value to Government—use metrics where possible (e.g., time saved, cost avoided, error reduction)."
+              required></textarea>
             <div class="sn-error">Business justification is required.</div>
           </div>
 
           <!-- Attachment (mandatory screenshot) -->
           <div class="sn-field" style="grid-column:1 / -1;">
             <label class="sn-label"><span class="req">*</span>Reference screenshot</label>
-            <input id="reference_screenshot" name="reference_screenshot" class="sn-file" type="file" accept="image/*" required />
+            <input id="reference_screenshot" name="reference_screenshot" class="sn-file" type="file" accept="image/*"
+              required />
             <div class="sn-help">
-              Provide a screenshot of something similar you require. <strong>Or, if you need to modify a report or dashboard,
+              Provide a screenshot of something similar you require. <strong>Or, if you need to modify a report or
+                dashboard,
                 provide a screenshot of what needs to be changed.</strong>
             </div>
             <div class="sn-error">A reference screenshot is required.</div>
@@ -117,14 +141,17 @@
           <!-- Request title -->
           <div class="sn-field" style="grid-column:1 / -1;">
             <label class="sn-label"><span class="req">*</span>Request title</label>
-            <input id="request_title" name="request_title" class="sn-input" placeholder="e.g., CFO Margin Bridge Dashboard" required />
+            <input id="request_title" name="request_title" class="sn-input"
+              placeholder="e.g., CFO Margin Bridge Dashboard" required />
             <div class="sn-error">Request title is required.</div>
           </div>
 
           <!-- Request description -->
           <div class="sn-field" style="grid-column:1 / -1;">
             <label class="sn-label"><span class="req">*</span>Request description</label>
-            <textarea id="request_description" name="request_description" class="sn-textarea" rows="6" placeholder="Describe in detail: key metrics, filters, grouping, time frames, visual types, user audience, refresh frequency, export needs, and security/scope requirements." required></textarea>
+            <textarea id="request_description" name="request_description" class="sn-textarea" rows="6"
+              placeholder="Describe in detail: key metrics, filters, grouping, time frames, visual types, user audience, refresh frequency, export needs, and security/scope requirements."
+              required></textarea>
             <div class="sn-help">Please provide as much detail as possible to speed up delivery.</div>
             <div class="sn-error">Request description is required.</div>
           </div>
@@ -146,4 +173,5 @@
 
   <script src="./demo.js"></script>
 </body>
+
 </html>

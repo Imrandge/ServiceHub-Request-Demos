@@ -73,7 +73,8 @@
 }
 
 /* Full-row field helper */
-.sn-grid > .sn-field.full { grid-column: 1 / -1 !important; }
+.sn-grid > .sn-field.full { grid-column: 1 / -1 !important;}
+.sn-grid > #mainFields { grid-column: 1 / -1; }
 
 /* (your existing) */
 .sn-grid {

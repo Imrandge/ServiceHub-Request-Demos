@@ -1,151 +1,180 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Modify Approval Workflow or DOA (ADERP)</title>
+  <title>Modify Approval Workflow or DoA (ADERP)</title>
 
-  <!-- Use relative paths so this works regardless of repo name -->
-  <link rel="stylesheet" href="../assets/tokens.css">
-  <link rel="stylesheet" href="../assets/fonts.css">
-  <link rel="stylesheet" href="../assets/components.css">
+  <!-- Shared assets (same order as your other forms) -->
+  <link rel="stylesheet" href="../assets/tokens.css" />
+  <link rel="stylesheet" href="../assets/fonts.css" />
+  <link rel="stylesheet" href="../assets/components.css" />
 </head>
+
 <body>
-  <main class="sn-form" id="formRoot">
-    <h1>Modify Approval Workflow or DOA (ADERP)</h1>
-    <p class="desc">
-      Modify ADERP workflow or Delegation of Authority (DoA)
-    </p>
+  <div class="container">
+    <div class="card">
+      <div class="sn-form">
 
-    <div class="sn-help" style="margin-bottom:16px;">
-      <p>
-        Use this request to change an ADERP workflow or DoA (add/remove approvers, update routing/thresholds, or set a temporary delegation).
-        If you have a workflow issue/error, submit an issue here:
-        <a id="issueLink" href="#" target="_blank" rel="noopener">Submit an issue</a>.
-      </p>
-      <p>
-        <strong>Note:</strong> Upon submission, approvals will be sent to your ADGEs section head (Human Resources, Procurement, and Finance).
-        Approval will also be required from the required Gov Function (GovTalent, GovProcurement, and GovAccounts).
-      </p>
-    </div>
+        <!-- Header (match General Enquiry look) -->
+        <h1 class="h1">Modify Approval Workflow or DoA (ADERP)</h1>
+        <p class="subtitle">Modify ADERP workflow or Delegation of Authority (DoA).</p>
 
-    <div class="approval-diagram" role="group" aria-label="Approval process diagram">
-  <img
-    src="./approval-process.png"  <!-- or: assets/img/approval-process.png -->
-  <noscript><p><em>Approval diagram requires images enabled.</em></p></noscript>
-</div>
+        <!-- Description with redirections (like General Enquiry) -->
+        <p class="form-note">
+          Use this request to change an ADERP workflow or DoA (e.g., add/remove approvers, update routing/thresholds, or
+          set a temporary delegation).
+          <br /><br />
+          If your need fits one of the categories below, use the appropriate request instead:
+        <ul style="margin:8px 0 0 18px;">
+          <li>System issue or something not working as expected → <a id="issue_link" href="#" target="_blank"
+              rel="noopener">submit an issue here</a></li>
+          <li>New capability or improvement → <a id="enhancement_link" href="#" target="_blank" rel="noopener">go
+              here</a></li>
+          <li>New or changed reports/dashboards → <a id="reporting_link" href="#" target="_blank" rel="noopener">go
+              here</a></li>
+          <li>Change to an approval workflow or Delegation of Authority (DoA) → <a id="workflow_link" href="#"
+              target="_blank" rel="noopener">go here</a></li>
+          <li>To request access → <a id="workflow_link" href="#" target="_blank" rel="noopener">go here</a></li>
+        </ul>
+        <br />
+        <strong>Important:</strong> Requests submitted under the wrong category may be rejected.
+        </p>
 
-    <div class="sn-grid">
-      <!-- Standard first five fields -->
-      <div class="sn-field" data-name="requested_by">
-        <label class="sn-label">Requested by <span class="req">*</span></label>
-        <input class="sn-input" type="text" value="Imran Akbik" readonly />
-      </div>
+        <!-- Approval diagram -->
+        <div class="approval-diagram" role="group" aria-label="Approval process diagram">
+          <img src="./approval-process.png"
+            alt="Two-step approval: Step 1 – Entity Section Head, then Step 2 – GovFunction. Routing is based on the functional area."
+            loading="lazy" decoding="async" />
+          <div class="caption">Approvals required (2 steps). The system auto-routes approvers by functional area.</div>
+        </div>
 
-      <div class="sn-field" data-name="requested_for">
-        <label class="sn-label">Requested for <span class="req">*</span></label>
-        <input class="sn-input" id="requested_for" type="text" value="Imran Akbik" />
-        <div class="sn-error">Please enter Requested for.</div>
-      </div>
+        <!-- Form grid -->
+        <div class="sn-grid">
 
-      <div class="sn-field" data-name="contact_number">
-        <label class="sn-label">Contact number <span class="req">*</span></label>
-        <input class="sn-input" id="contact_number" type="tel" placeholder="+971 50 000 0000" />
-        <div class="sn-error">Please enter a contact number.</div>
-      </div>
+          <!-- First five fields -->
+          <div class="sn-field" data-name="requested_by">
+            <label class="sn-label"><span class="req">*</span>Requested by</label>
+            <input class="sn-input" type="text" value="Imran Akbik" readonly />
+          </div>
 
-      <div class="sn-field" data-name="entity">
-        <label class="sn-label">Entity</label>
-        <input class="sn-input" id="entity" type="text" value="Department of Government Enablement" />
-      </div>
+          <div class="sn-field" data-name="requested_for">
+            <label class="sn-label"><span class="req">*</span>Requested for</label>
+            <input class="sn-input" id="requested_for" type="text" value="Imran Akbik" />
+            <div class="sn-error">Please enter Requested for.</div>
+          </div>
 
-      <div class="sn-field" data-name="location">
-        <label class="sn-label">Location <span class="req">*</span></label>
-        <input class="sn-input" id="location" type="text" value="DGE HQ" />
-        <div class="sn-error">Please enter a location.</div>
-      </div>
+          <div class="sn-field" data-name="contact_number">
+            <label class="sn-label"><span class="req">*</span>Contact number</label>
+            <input class="sn-input" id="contact_number" type="tel" placeholder="+971 50 000 0000" />
+            <div class="sn-help">Include country code.</div>
+            <div class="sn-error">Please enter a contact number.</div>
+          </div>
 
-      <div class="sn-field full">
-        <label class="sn-label"><span class="req">*</span>Offering</label>
-        <select id="offering" class="sn-select" required>
-          <option value="" selected disabled>-- Select --</option>
-          <option>Human Resources (ADERP - Fusion)</option>
-          <option>Finance (ADERP - Fusion)</option>
-          <option>Procurement (ADERP - Fusion)</option>
-        </select>
-        <div class="sn-error">Offering is required.</div>
-      </div>
-      
-      <div class="sn-field full">
-        <label class="sn-label">Request type</label>
-        <input class="sn-input" value="Modify Approval Workflow or DoA" readonly />
-        <div class="sn-help">Read-only; preset by policy.</div>
-      </div>
+          <div class="sn-field" data-name="entity">
+            <label class="sn-label">Entity</label>
+            <input class="sn-input" id="entity" type="text" value="Department of Government Enablement" />
+          </div>
 
+          <div class="sn-field" data-name="location">
+            <label class="sn-label"><span class="req">*</span>Location</label>
+            <input class="sn-input" id="location" type="text" value="DGE HQ" />
+            <div class="sn-error">Please enter a location.</div>
+          </div>
 
-      <!-- Module (depends on Offering/Domain) -->
-      <div class="sn-field" data-name="module">
-        <label class="sn-label">Module <span class="req">*</span></label>
-        <select class="sn-select" id="module" disabled>
-          <option value="">-- Select Offering first --</option>
-        </select>
-        <div class="sn-error">Module is required.</div>
-      </div>
+          <!-- Offering (full width) -->
+          <div class="sn-field full">
+            <label class="sn-label"><span class="req">*</span>Offering</label>
+            <select id="offering" class="sn-select" required>
+              <option value="" selected disabled>-- Select --</option>
+              <option>Human Resources (ADERP - Fusion)</option>
+              <option>Finance (ADERP - Fusion)</option>
+              <option>Procurement (ADERP - Fusion)</option>
+            </select>
+            <div class="sn-error">Offering is required.</div>
+          </div>
 
-      <!-- Workflow or DOA to modify (depends on Module) -->
-      <div class="sn-field" data-name="workflow">
-        <label class="sn-label">Workflow or DOA to modify <span class="req">*</span></label>
-        <select class="sn-select" id="workflow" disabled>
-          <option value="">-- Select Module first --</option>
-        </select>
-        <div class="sn-error">Workflow/DOA is required.</div>
-      </div>
+          <!-- Request type (read-only, full width) -->
+          <div class="sn-field full">
+            <label class="sn-label">Request type</label>
+            <input class="sn-input" value="Modify Approval Workflow or DoA" readonly />
+            <div class="sn-help">Read-only; preset by policy.</div>
+          </div>
 
-      <!-- Other workflow or DOA (visible+required only if workflow == Other (specify)) -->
-      <div class="sn-field hidden" data-name="other_workflow" id="otherWrapper" style="grid-column: 1 / -1;">
-        <label class="sn-label">Other workflow or DOA <span class="req">*</span></label>
-        <input class="sn-input" id="other_workflow" type="text" placeholder="Describe the workflow/DOA not listed above" />
-        <div class="sn-error">Please specify the workflow/DOA.</div>
-      </div>
+          <!-- Module (depends on Offering) -->
+          <div class="sn-field full" data-name="module">
+            <label class="sn-label"><span class="req">*</span>Module</label>
+            <select class="sn-select" id="module" disabled>
+              <option value="">-- Select Offering first --</option>
+            </select>
+            <div class="sn-error">Module is required.</div>
+          </div>
 
-      <!-- Business justification -->
-      <div class="sn-field" data-name="business_justification" style="grid-column: 1 / -1;">
-        <label class="sn-label">Business justification <span class="req">*</span></label>
-        <textarea class="sn-textarea" id="business_justification" placeholder="Provide clear business justification why this change is required"></textarea>
-        <div class="sn-help">Please provide clear business justification why this change is required.</div>
-        <div class="sn-error">Business justification is required.</div>
-      </div>
+          <!-- Workflow / DoA (depends on Module) -->
+          <div class="sn-field full" data-name="workflow">
+            <label class="sn-label"><span class="req">*</span>Workflow or DoA to modify</label>
+            <select class="sn-select" id="workflow" disabled>
+              <option value="">-- Select Module first --</option>
+            </select>
+            <div class="sn-error">Workflow/DoA is required.</div>
+          </div>
 
-      <!-- Additional support documents (optional) -->
-      <div class="sn-field" data-name="attachments" style="grid-column: 1 / -1;">
-        <label class="sn-label">Additional support documents</label>
-        <input class="sn-file" id="attachments" type="file" multiple />
-        <div class="sn-help">Optional. Provide any supporting documents, such as approvals.</div>
-        <div id="attachmentList" class="sn-help" style="margin-top:8px;"></div>
-      </div>
+          <!-- Other workflow / DoA (only if "Other (specify)") -->
+          <div class="sn-field full hidden" id="otherWrapper">
+            <label class="sn-label"><span class="req">*</span>Other workflow or DoA</label>
+            <input class="sn-input" id="other_workflow" type="text"
+              placeholder="Describe the workflow/DoA not listed above" />
+            <div class="sn-error">Please specify the workflow/DoA.</div>
+          </div>
 
-      <!-- Request title -->
-      <div class="sn-field" data-name="request_title">
-        <label class="sn-label">Request title <span class="req">*</span></label>
-        <input class="sn-input" id="request_title" type="text" placeholder="e.g., Update approver for AP Invoice Approval" />
-        <div class="sn-error">Request title is required.</div>
-      </div>
+          <!-- Business justification -->
+          <div class="sn-field full" data-name="business_justification">
+            <label class="sn-label"><span class="req">*</span>Business justification</label>
+            <textarea class="sn-textarea" id="business_justification" rows="4"
+              placeholder="Requests without a suitable business justification may be deprioritized or rejected. Please articulate the value to Government—use metrics where possible (e.g., time saved, cost avoided, error reduction)."></textarea>
+            <div class="sn-error">Business justification is required.</div>
+          </div>
 
-      <!-- Describe the required changes -->
-      <div class="sn-field" data-name="change_description" style="grid-column: 1 / -1;">
-        <label class="sn-label">Describe the required changes <span class="req">*</span></label>
-        <textarea class="sn-textarea" id="change_description" placeholder="Provide as much detail as possible and attach relevant screenshots or supporting documents."></textarea>
-        <div class="sn-help">Please provide as much detail as possible and attach relevant screenshots or supporting documents.</div>
-        <div class="sn-error">Description of the required changes is required.</div>
-      </div>
-    </div>
+          <!-- Attachments -->
+          <div class="sn-field full" data-name="attachments">
+            <label class="sn-label">Additional support documents</label>
+            <input class="sn-file" id="attachments" type="file" multiple />
+            <div class="sn-help">Optional. Provide any supporting documents, such as approvals.</div>
+            <div id="attachmentList" class="sn-help" style="margin-top:8px;"></div>
+          </div>
 
-    <div class="sn-actions">
-      <button class="btn btn-primary" id="submitBtn">Submit</button>
-      <button class="btn btn-secondary" type="button" onclick="window.print()">Print to PDF</button>
-    </div>
-  </main>
+          <!-- Request title -->
+          <div class="sn-field full" data-name="request_title">
+            <label class="sn-label"><span class="req">*</span>Request title</label>
+            <input class="sn-input" id="request_title" type="text"
+              placeholder="e.g., Update approver for AP Invoice Approval" />
+            <div class="sn-error">Request title is required.</div>
+          </div>
 
-  <script src="./demo.js"></script>
+          <!-- Change description -->
+          <div class="sn-field full" data-name="change_description">
+            <label class="sn-label"><span class="req">*</span>Describe the required changes</label>
+            <textarea class="sn-textarea" id="change_description" rows="6"
+              placeholder="Provide as much detail as possible and attach relevant screenshots or supporting documents."></textarea>
+            <div class="sn-error">Description of the required changes is required.</div>
+          </div>
+
+        </div><!-- /sn-grid -->
+
+        <!-- Actions -->
+        <div class="sn-actions">
+          <button class="btn" id="submitBtn" type="button">Submit (mock)</button>
+          <button class="btn btn-secondary" type="button" onclick="window.print()">Print to PDF</button>
+        </div>
+
+        <div id="submission_output" class="note hidden" style="margin-top:16px;"></div>
+
+      </div><!-- /sn-form -->
+    </div><!-- /card -->
+  </div><!-- /container -->
+
+  <script src="./demo.js?v=2" defer></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,48 +11,48 @@
   <link rel="stylesheet" href="../assets/fonts.css" />
   <link rel="stylesheet" href="../assets/components.css" />
 </head>
+
 <body>
   <div class="container">
     <div class="card">
       <div class="sn-form">
 
-        <!-- Header -->
+        <!-- Header (same look as General Enquiry) -->
         <h1 class="h1">Request a Modification or Enhancement (ADERP)</h1>
         <p class="subtitle">
-          Submit a structured request to modify fields/forms, notifications, business rules, integrations, or platform capabilities in ADERP.
+          Submit a structured request to modify fields/forms, notifications, business rules, integrations, or platform
+          capabilities in ADERP.
         </p>
 
-        <!-- Description / note -->
+        <!-- Description / redirections -->
         <p class="form-note">
           Use this catalog item for enhancements and configuration changes.
-        
           <br /><br />
           If your need fits one of the categories below, use the appropriate request instead:
         <ul style="margin:8px 0 0 18px;">
           <li>System issue or something not working as expected → <a id="issue_link" href="#" target="_blank"
               rel="noopener">submit an issue here</a></li>
-          <li>General Enquiry → <a id="enhancement_link" href="#" target="_blank" rel="noopener">go here</a></li>
-          <li>New or changed reports/dashboards → <a id="reporting_link" href="#" target="_blank" rel="noopener">go here</a>
-          </li>
-          <li>Change to an approval workflow or Delegation of Authority (DoA) → <a id="workflow_link" href="#" target="_blank"
+          <li>General enquiry (advice only, no changes) → <a id="enhancement_link" href="#" target="_blank"
               rel="noopener">go here</a></li>
-          <li>To request access → <a id="workflow_link" href="#" target="_blank" rel="noopener">go here</a></li>
+          <li>New or changed reports/dashboards → <a id="reporting_link" href="#" target="_blank" rel="noopener">go
+              here</a></li>
+          <li>Change to an approval workflow or Delegation of Authority (DoA) → <a id="workflow_link" href="#"
+              target="_blank" rel="noopener">go here</a></li>
+          <li>To request access → <a id="access_link" href="#" target="_blank" rel="noopener">go here</a></li>
         </ul>
         <br />
         <strong>Important:</strong> Requests submitted under the wrong category will be rejected.
         </p>
-        
 
         <!-- Approval diagram -->
         <div class="approval-diagram" role="group" aria-label="Approval process diagram">
-          <img
-            src="./approval-process.png"
+          <img src="./approval-process.png"
             alt="Two-step approval: Step 1 – Entity Section Head, then Step 2 – GovFunction. Routing is based on the functional area."
             loading="lazy" decoding="async" />
           <div class="caption">Approvals required (2 steps). The system auto-routes approvers by functional area.</div>
         </div>
 
-        <!-- Grid -->
+        <!-- Form grid -->
         <div class="sn-grid">
           <!-- Requestor details (same 5 fields as other forms) -->
           <div class="sn-field">
@@ -62,7 +63,8 @@
 
           <div class="sn-field">
             <label class="sn-label"><span class="req">*</span>Requested for</label>
-            <input id="requested_for" name="requested_for" class="sn-input" placeholder="Person/team the work is for…" required />
+            <input id="requested_for" name="requested_for" class="sn-input" placeholder="Person/team the work is for…"
+              required />
             <div class="sn-error">Please enter who this is for.</div>
           </div>
 
@@ -112,19 +114,20 @@
           </div>
 
           <!-- Reporting redirect guidance (only for "reporting") -->
-          <div class="sn-field hidden full" id="reportingRedirect">
+          <div class="sn-field full hidden" id="reportingRedirect">
             <div class="sn-label">For reports &amp; dashboards</div>
             <div class="help">
               For Reporting and dashboards, please use this request:
-              <a id="reporting_link" href="#" target="_blank" rel="noopener">Reports, Data Management &amp; Analytics (ADERP)</a>.
+              <a id="reporting_redirect_link" href="#" target="_blank" rel="noopener">Reports, Data Management &amp;
+                Analytics (ADERP)</a>.
             </div>
           </div>
 
-          <!-- Everything below here hides when request type = reporting -->
-          <div id="mainFields">
+          <!-- Everything below hides when Request type = reporting -->
+          <div id="mainFields" class="full">
 
-            <!-- Module (full width, dependent on offering) -->
-            <div class="sn-field" style="grid-column:1 / -1;">
+            <!-- Module (full width; depends on offering) -->
+            <div class="sn-field full">
               <label class="sn-label"><span class="req">*</span>Module</label>
               <select id="module" name="module" class="sn-select" required>
                 <option value="" selected disabled>-- Select Offering first --</option>
@@ -133,27 +136,30 @@
             </div>
 
             <!-- Business justification (full) -->
-            <div class="sn-field" style="grid-column:1 / -1;">
+            <div class="sn-field full">
               <label class="sn-label"><span class="req">*</span>Business justification</label>
               <textarea id="business_justification" name="business_justification" class="sn-textarea" rows="4"
-                placeholder="Explain the business need, decision/process impacted, and expected outcome." required></textarea>
+                placeholder="Requests without a suitable business justification may be deprioritized or rejected. Please articulate the value to Government—use metrics where possible (e.g., time saved, cost avoided, error reduction)."
+                required></textarea>
               <div class="sn-error">Business justification is required.</div>
             </div>
 
             <!-- Specify component (full) -->
-            <div class="sn-field" style="grid-column:1 / -1;">
+            <div class="sn-field full">
               <label class="sn-label"><span class="req">*</span>Specify the component to modify</label>
               <input id="component" name="component" class="sn-input"
-                placeholder="e.g., Vendor form → Payment terms field; AP Workflow rule; Outbound integration; 'PO Approved' email template" required />
+                placeholder="e.g., Vendor form → Payment terms field; AP Workflow rule; Outbound integration; 'PO Approved' email template"
+                required />
               <div class="sn-help">
-                Name the exact element to be changed, based on your Request type (field/form, notification, business rule, integration,
+                Name the exact element to be changed, based on your Request type (field/form, notification, business
+                rule, integration,
                 platform feature, or process step).
               </div>
               <div class="sn-error">Please specify the component to modify.</div>
             </div>
 
             <!-- Attachments (full) -->
-            <div class="sn-field" style="grid-column:1 / -1;">
+            <div class="sn-field full">
               <label class="sn-label"><span class="req">*</span>Attachments</label>
               <input id="attachments" name="attachments" class="sn-file" type="file" multiple />
               <div class="sn-help">Provide additional documents or screenshots that illustrate the change.</div>
@@ -161,7 +167,7 @@
             </div>
 
             <!-- Request title (full) -->
-            <div class="sn-field" style="grid-column:1 / -1;">
+            <div class="sn-field full">
               <label class="sn-label"><span class="req">*</span>Request title</label>
               <input id="request_title" name="request_title" class="sn-input"
                 placeholder="e.g., Add 'Payment Terms' to Vendor Form; Increase PR approval threshold" required />
@@ -169,7 +175,7 @@
             </div>
 
             <!-- Request description (full) -->
-            <div class="sn-field" style="grid-column:1 / -1;">
+            <div class="sn-field full">
               <label class="sn-label"><span class="req">*</span>Request description</label>
               <textarea id="request_description" name="request_description" class="sn-textarea" rows="6"
                 placeholder="Describe the change in detail: current vs desired behavior, users impacted, conditions/thresholds, routing, dependencies, non-functional needs (security, audit, performance), and testing/rollout considerations."
@@ -194,6 +200,7 @@
     </div><!-- /card -->
   </div><!-- /container -->
 
-  <script src="./demo.js?v=2" defer></script>
+  <script src="./demo.js?v=3" defer></script>
 </body>
+
 </html>

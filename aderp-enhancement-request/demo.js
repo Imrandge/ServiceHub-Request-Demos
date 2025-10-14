@@ -1,48 +1,51 @@
-// Request a Modification or Enhancement (ADERP) – Demo logic
+// Request a Modification or Enhancement (ADERP) – Demo logic (General Enquiry look, updated mapping)
 
-// ---- Replace with real URLs ----
-const INCIDENT_FORM_URL     = "https://example.com/incident";   // link for defects/errors
-const REPORTING_REQUEST_URL = "https://example.com/reporting";  // link to Reports, Data Mgmt & Analytics item
+// ---- Replace with real URLs (optional) ----
+const INCIDENT_FORM_URL      = "https://example.com/incident";      // issue form
+const REPORTING_REQUEST_URL  = "https://example.com/reporting";     // reporting catalog item
+const GENERAL_ENQUIRY_URL    = "https://example.com/general-enquiry";
+const WORKFLOW_DOA_URL       = "https://example.com/workflow-doa";
+const ACCESS_REQUEST_URL     = "https://example.com/access";
 
-// ---- Module mapping from your list (deduplicated) ----
+// ---- Offering → Module mapping (exactly as provided; deduplicated) ----
 const MODULES_BY_OFFERING = {
+  "Finance (ADERP - Fusion)": [
+    "Cash Management",
+    "Project to Close",
+    "Fixed Assets",
+    "Record to Report",
+    "Procure to Pay (Accounts Payable)",
+    "Order to Cash (Accounts Receivable)",
+    "Payroll"
+  ],
   "Human Resources (ADERP - Fusion)": [
-    "Core HR (Person Management)",
+    "Talent Management",
+    "Talent Acquisition",
+    "Learning",
     "Payroll",
-    "Absence Management",
-    "Time & Labor (OTL)",
     "Compensation",
     "Benefits",
-    "Recruiting",
+    "Absence Management",
+    "Employee Data Administration",
+    "Organization Relationships",
     "Onboarding",
-    "Learning",
-    "Talent / Performance",
-    "HR Help Desk"
+    "Separation",
+    "Duty Travel",
+    "Manage Communications",
+    "Time & Labor"
   ],
   "Procurement (ADERP - Fusion)": [
-    "Self-Service Procurement (SSP)",
-    "Purchasing",
-    "Supplier Registration/Qualification",
-    "Supplier Portal",
-    "Sourcing",
-    "Procurement Contracts",
-    "Agreements (Blanket/Contract)",
-    "Catalog & Category Management"
-  ],
-  "Finance (ADERP - Fusion)": [
-    "Accounts Payable",
-    "Expenses",
-    "Accounts Receivable",
-    "General Ledger",
-    "Fixed Assets",
-    "Cash Management",
-    "Intercompany",
-    "Tax",
-    "Collections",
-    "Revenue Management"
+    "Requisition & Order Management",
+    "Manage Inventory Operations​",
+    "Supplier Performance and Relationship Management​",
+    "Manage Procurement Contracts​",
+    "Sourcing Preparation and Execution​",
+    "MDM​ Master Data Management",
+    "Purchasing"
   ]
 };
 
+// ---------- utilities ----------
 const qs  = (s, el=document) => el.querySelector(s);
 const show = el => el && el.classList.remove("hidden");
 const hide = el => el && el.classList.add("hidden");
@@ -52,7 +55,6 @@ function setError(fieldWrap, hasError, msgEl){
   fieldWrap.classList.toggle("error", !!hasError);
   if (msgEl) msgEl.style.display = hasError ? "block" : "none";
 }
-
 function validateRequiredField(inputEl){
   const wrap = inputEl.closest(".sn-field");
   const isFile = inputEl.type === "file";
@@ -61,14 +63,12 @@ function validateRequiredField(inputEl){
   setError(wrap, !ok, qs(".sn-error", wrap));
   return !!ok;
 }
-
 function isReportingSelection(selectEl){
   const val = (selectEl.value || "").toLowerCase();
   if (val === "reporting") return true;
   const txt = selectEl.options[selectEl.selectedIndex]?.text?.toLowerCase() || "";
   return txt.startsWith("create / modify report");
 }
-
 function populateModules(offeringVal){
   const moduleSel = qs("#module");
   moduleSel.innerHTML = "";
@@ -86,12 +86,22 @@ function populateModules(offeringVal){
   });
 }
 
+// ---------- main ----------
 document.addEventListener("DOMContentLoaded", () => {
-  // Links
-  const incidentLink  = qs("#incident_link");
-  const reportingLink = qs("#reporting_link");
-  if (incidentLink)  incidentLink.href  = INCIDENT_FORM_URL;
-  if (reportingLink) reportingLink.href = REPORTING_REQUEST_URL;
+  // External links for description/redirects (if used)
+  const issueLink       = qs("#issue_link");
+  const enhancementLink = qs("#enhancement_link");
+  const reportingLink   = qs("#reporting_link");
+  const workflowLink    = qs("#workflow_link");
+  const accessLink      = qs("#access_link");
+  const reportingRedirect = qs("#reporting_redirect_link");
+
+  if (issueLink)            issueLink.href            = INCIDENT_FORM_URL;
+  if (enhancementLink)      enhancementLink.href      = GENERAL_ENQUIRY_URL;
+  if (reportingLink)        reportingLink.href        = REPORTING_REQUEST_URL;
+  if (workflowLink)         workflowLink.href         = WORKFLOW_DOA_URL;
+  if (accessLink)           accessLink.href           = ACCESS_REQUEST_URL;
+  if (reportingRedirect)    reportingRedirect.href    = REPORTING_REQUEST_URL;
 
   // Elements
   const offeringSel   = qs("#offering");
@@ -102,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const printBtn      = qs("#printBtn");
   const out           = qs("#submission_output");
 
-  // Populate modules on Offering change
+  // Populate modules when Offering changes
   offeringSel.addEventListener("change", () => populateModules(offeringSel.value));
   populateModules(""); // initial placeholder
 
