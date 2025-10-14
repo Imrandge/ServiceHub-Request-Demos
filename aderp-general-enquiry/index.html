@@ -1,84 +1,140 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ADERP General Enquiry — Demo Form</title>
-  <link rel="stylesheet" href="../assets/tokens.css">
-  <link rel="stylesheet" href="../assets/fonts.css">
-  <link rel="stylesheet" href="../assets/components.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>General Enquiry (ADERP)</title>
+
+  <!-- Shared assets (same stack/order as your other demos) -->
+  <link rel="stylesheet" href="../assets/tokens.css" />
+  <link rel="stylesheet" href="../assets/fonts.css" />
+  <link rel="stylesheet" href="../assets/components.css" />
 </head>
 <body>
-  <main class="sn-form" id="formRoot">
-    <h1>ADERP General Enquiry</h1>
-    <p class="desc">
-      Submit a general enquiry for ADERP. Submit any enquiries or questions relating to ADERP.
-      If you are experiencing an issue with ADERP, please <a href="#" id="issueLink" target="_blank" rel="noopener">submit an issue here</a>.
-    </p>
 
-    <div class="sn-grid">
-      <div class="sn-field" data-name="requested_by">
-        <label class="sn-label">Requested by <span class="req">*</span></label>
-        <input class="sn-input" type="text" value="Imran Akbik" readonly />
-      </div>
+  <div class="container">
+    <div class="card">
+      <div class="sn-form">
 
-      <div class="sn-field" data-name="requested_for">
-        <label class="sn-label">Requested for <span class="req">*</span></label>
-        <input class="sn-input" type="text" value="Imran Akbik" />
-      </div>
+        <!-- Header (same style as Reporting) -->
+        <h1 class="h1">General Enquiry (ADERP)</h1>
+        <p class="subtitle">Ask a question about ADERP. Advisory only—no changes or actions will be performed.</p>
 
-      <div class="sn-field" data-name="contact_number">
-        <label class="sn-label">Contact number <span class="req">*</span></label>
-        <input class="sn-input" id="contact_number" type="tel" placeholder="+971 50 000 0000" />
-      </div>
+        <!-- Description / note -->
+        <p class="form-note">
+          This service allows you to ask questions related to ADERP. The team will provide advice and guidance only.
+          Submitting this request will <strong>not</strong> result in any changes being made in ADERP.
+          <br /><br />
+          If your need fits one of the categories below, use the appropriate request instead:
+        <ul style="margin:8px 0 0 18px;">
+          <li>System issue or something not working as expected → <a id="issue_link" href="#" target="_blank"
+              rel="noopener">submit an issue here</a></li>
+          <li>New capability or improvement → <a id="enhancement_link" href="#" target="_blank" rel="noopener">go here</a></li>
+          <li>New or changed reports/dashboards → <a id="reporting_link" href="#" target="_blank" rel="noopener">go here</a></li>
+          <li>Change to an approval workflow or Delegation of Authority (DoA) → <a id="workflow_link" href="#" target="_blank"
+              rel="noopener">go here</a></li>
+          <li>To request access → <a id="workflow_link" href="#" target="_blank" rel="noopener">go here</a></li>
+        </ul>
+        <br />
+        <strong>Important:</strong> Requests submitted under the wrong category will be rejected.
+        </p>
 
-      <div class="sn-field" data-name="entity">
-        <label class="sn-label">Entity</label>
-        <input class="sn-input" type="text" value="Department of Government Enablement" />
-      </div>
+        <!-- Grid -->
+        <div class="sn-grid">
 
-      <div class="sn-field" data-name="location">
-        <label class="sn-label">Location <span class="req">*</span></label>
-        <input class="sn-input" type="text" value="DGE HQ" />
-      </div>
+          <!-- Requester block (same 5 fields as your other forms) -->
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Requested by</label>
+            <input id="requested_by" class="sn-input" placeholder="Search/requester…" required />
+            <div class="sn-error">Please enter the requester.</div>
+          </div>
 
-      <div class="sn-field" data-name="offering" style="grid-column: 1 / -1;">
-        <label class="sn-label">Offering <span class="req">*</span></label>
-        <select class="sn-select" id="offering" required>
-          <option value="">-- Select --</option>
-          <option>Finance (ADERP - Fusion)</option>
-          <option>Human Resources (ADERP - Fusion)</option>
-          <option>Procurement (ADERP - Fusion)</option>
-        </select>
-        <div class="sn-error">Offering is required.</div>
-      </div>
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Requested for</label>
+            <input id="requested_for" class="sn-input" placeholder="Person/team the work is for…" required />
+            <div class="sn-error">Please enter who this is for.</div>
+          </div>
 
-      <div class="sn-field readonly" data-name="request_type">
-        <label class="sn-label">Request type</label>
-        <input class="sn-input" type="text" value="General Enquiry" readonly />
-        <div class="sn-help">Read-only; preset by policy</div>
-      </div>
+          <div class="sn-field">
+            <label class="sn-label"><span class="req">*</span>Contact number</label>
+            <input id="contact" class="sn-input" placeholder="+971 50 000 0000" required />
+            <div class="sn-help">Include country code.</div>
+            <div class="sn-error">Please enter a contact number.</div>
+          </div>
 
-      <div class="sn-field" data-name="request_title">
-        <label class="sn-label">Request title <span class="req">*</span></label>
-        <input class="sn-input" id="request_title" type="text" placeholder="e.g., Clarification on purchase workflow" />
-        <div class="sn-error">Please enter a title.</div>
-      </div>
+          <div class="sn-field">
+            <label class="sn-label">Entity</label>
+            <input id="entity" class="sn-input" placeholder="e.g., Department of Government Enablement" />
+          </div>
 
-      <div class="sn-field" data-name="request_description" style="grid-column: 1 / -1;">
-        <label class="sn-label">Request description <span class="req">*</span></label>
-        <textarea class="sn-textarea" id="request_description" placeholder="Describe your enquiry..."></textarea>
-        <div class="sn-error">Please enter a description.</div>
-      </div>
-    </div>
+          <div class="sn-field">
+            <label class="sn-label">Location</label>
+            <input id="location" class="sn-input" placeholder="e.g., DGE HQ" />
+          </div>
 
-    <div class="sn-actions">
-      <button class="btn btn-primary" id="submitBtn">Submit</button>
-      <button class="btn btn-secondary" type="button" onclick="window.print()">Print to PDF</button>
-    </div>
-  </main>
+          <!-- Offering (full row) -->
+          <div class="sn-field full">
+            <label class="sn-label"><span class="req">*</span>Offering</label>
+            <select id="offering" class="sn-select" required>
+              <option value="" selected disabled>-- Select --</option>
+              <option>Human Resources (ADERP - Fusion)</option>
+              <option>Finance (ADERP - Fusion)</option>
+              <option>Procurement (ADERP - Fusion)</option>
+              <option>Enterprise Performance Management (ADERP - Fusion)</option>
+            </select>
+            <div class="sn-error">Offering is required.</div>
+          </div>
 
-  <script src="./demo.js"></script>
+          <!-- Topic (dependent on Offering) -->
+          <div class="sn-field full" id="topicFieldWrap">
+            <label class="sn-label"><span class="req">*</span>Topic</label>
+            <select id="topic" class="sn-select" required>
+              <option value="" selected disabled>-- Select Offering first --</option>
+            </select>
+            <div class="sn-error">Topic is required.</div>
+          </div>
+
+          <!-- Knowledge link + confirmation (appears after Topic chosen) -->
+          <div class="sn-field full hidden" id="knowledgeBlock">
+            <div class="help">
+              Please review available knowledge for this topic:
+              <a id="knowledge_link" href="#" target="_blank" rel="noopener">Open knowledge articles</a>
+            </div>
+            <label class="sn-label" style="margin-top:8px;">
+              <input type="checkbox" id="confirm_reviewed" style="width:auto; margin-right:6px;" />
+              I confirm that I have reviewed the available knowledge and cannot find something that answers my enquiry.
+            </label>
+            <div class="sn-error" id="confirm_reviewed_error">You must confirm you reviewed available knowledge.</div>
+          </div>
+
+          <!-- Title & Description (shown after Topic) -->
+          <div class="sn-field full hidden" id="titleWrap">
+            <label class="sn-label"><span class="req">*</span>Request title</label>
+            <input id="request_title" class="sn-input" placeholder="e.g., Clarification on Payroll retro rules" />
+            <div class="sn-error">Request title is required.</div>
+          </div>
+
+          <div class="sn-field full hidden" id="descWrap">
+            <label class="sn-label"><span class="req">*</span>Request description</label>
+            <textarea id="request_description" class="sn-textarea" rows="6"
+              placeholder="Describe your enquiry and the context: business scenario, users affected, examples, and what you’ve already checked."></textarea>
+            <div class="sn-error">Request description is required.</div>
+          </div>
+
+        </div> <!-- /sn-grid -->
+
+        <!-- Actions -->
+        <div class="sn-actions">
+          <button id="submitBtn" class="btn" type="submit">Submit (mock)</button>
+          <button id="printBtn" class="btn btn-secondary" type="button">Print to PDF</button>
+        </div>
+
+        <div id="submission_output" class="note hidden" style="margin-top:16px;"></div>
+
+      </div><!-- /sn-form -->
+    </div><!-- /card -->
+  </div><!-- /container -->
+
+  <script src="./demo.js?v=1" defer></script>
 </body>
 </html>
