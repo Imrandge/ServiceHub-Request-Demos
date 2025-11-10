@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>General Enquiry (ADERP)</title>
+  <title>User Guidance and Training (ADERP)</title>
 
   <!-- Shared assets (same stack/order as your other demos) -->
   <link rel="stylesheet" href="../assets/tokens.css" />
@@ -17,12 +17,12 @@
       <div class="sn-form">
 
         <!-- Header (same style as Reporting) -->
-        <h1 class="h1">General Enquiry (ADERP)</h1>
-        <p class="subtitle">Ask a question about ADERP.</p>
+        <h1 class="h1">User Guidance and Training (ADERP)</h1>
+        <p class="subtitle">Request guidance or training for ADERP.</p>
 
         <!-- Description / note -->
         <p class="form-note">
-          This service allows you to ask questions related to ADERP. The team will provide advice and guidance only.
+          This service allows you to ask questions related to ADERP. The team will provide advice and guidance only. You can also use this service to request training.
           Submitting this request will <strong>not</strong> result in any changes being made in ADERP.
           <br /><br />
           If your need fits one of the categories below, use the appropriate request instead:
@@ -83,6 +83,17 @@
               <option>Enterprise Performance Management (ADERP - Fusion)</option>
             </select>
             <div class="sn-error">Offering is required.</div>
+          </div>
+
+          <!-- Request type (under Offering, optional) -->
+          <div class="sn-field full">
+            <label class="sn-label">Request type</label>
+            <select id="request_type" class="sn-select">
+              <option value="" selected disabled>-- Select --</option>
+              <option>Advice and Guidance</option>
+              <option>Request for Training</option>
+              <option>Training Materials Update</option>
+            </select>
           </div>
 
           <!-- Topic (dependent on Offering) -->
